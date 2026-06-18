@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+portfolio/
+ ├── index.html
+ ├── style.css
+ ├── script.js
+ ├── images/
+ │    ├── poster.jpg
+ │    ├── goods.jpg
+ ├── video/
+ │    ├── promo.mp4
+
+ <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -9,42 +19,49 @@
 
 <body>
 
-  <!-- SECTION 1: POSTER -->
+  <!-- LOADING -->
+  <div class="loader">
+    <h1>FOOD PORTFOLIO</h1>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div>🍽 Portfolio</div>
+    <div>Poster / Video / Goods</div>
+  </nav>
+
+  <!-- SECTION 1 -->
   <section class="section poster">
-    <div class="left">
-      <h1>01<br>Poster Design</h1>
-      <p>하늘빛 무드로 제작한 맛집 포스터</p>
+    <div class="text reveal">
+      <h1>Poster Design</h1>
+      <p>하늘빛 감성으로 제작된 맛집 포스터</p>
     </div>
-
-    <div class="right">
-      <img src="images/poster.jpg" alt="poster">
+    <div class="media reveal">
+      <img src="images/poster.jpg">
     </div>
   </section>
 
-  <!-- SECTION 2: VIDEO -->
+  <!-- SECTION 2 -->
   <section class="section video">
-    <div class="left">
-      <h1>02<br>Promo Video</h1>
-      <p>브랜드 감성을 담은 영상 콘텐츠</p>
+    <div class="text reveal">
+      <h1>Promo Video</h1>
+      <p>브랜드 무드를 담은 영상 콘텐츠</p>
     </div>
 
-    <div class="right">
-      <div class="video-box">
-        <video id="video" src="video/promo.mp4"></video>
-        <button id="playBtn">Play</button>
-      </div>
+    <div class="media reveal">
+      <video id="video" src="video/promo.mp4"></video>
+      <button id="playBtn">▶ Play</button>
     </div>
   </section>
 
-  <!-- SECTION 3: GOODS -->
+  <!-- SECTION 3 -->
   <section class="section goods">
-    <div class="left">
-      <h1>03<br>Goods Design</h1>
-      <p>브랜드 아이덴티티를 담은 굿즈</p>
+    <div class="text reveal">
+      <h1>Goods Design</h1>
+      <p>브랜드 아이덴티티 굿즈 제작</p>
     </div>
-
-    <div class="right">
-      <img src="images/goods.jpg" alt="goods">
+    <div class="media reveal">
+      <img src="images/goods.jpg">
     </div>
   </section>
 
@@ -52,72 +69,93 @@
 </body>
 </html>
 
-/* 전체 스크롤 스냅 */
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  background: #eaf7ff;
 }
 
-/* 섹션 = 한 화면 */
-.section {
+/* LOADER */
+.loader {
+  position: fixed;
+  width: 100%;
   height: 100vh;
-  display: flex;
-  scroll-snap-align: start;
-}
-
-/* 좌측 텍스트 */
-.left {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px;
-}
-
-.left h1 {
-  font-size: 48px;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.left p {
-  margin-top: 20px;
-  color: #555;
-}
-
-/* 우측 비주얼 */
-.right {
-  width: 60%;
+  background: #8fd3ff;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
+  animation: fadeOut 1s 1.5s forwards;
 }
 
-/* 이미지 */
-.right img {
-  width: 80%;
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+/* SECTION */
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 60px;
+  scroll-snap-align: start;
+}
+
+/* 배경 */
+.poster {
+  background: linear-gradient(120deg, #d9f3ff, #ffffff);
+}
+.video {
+  background: linear-gradient(120deg, #bfe9ff, #eaf7ff);
+}
+.goods {
+  background: linear-gradient(120deg, #a6ddff, #dff5ff);
+}
+
+/* TEXT */
+.text {
+  width: 40%;
+}
+
+.text h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.text p {
+  color: #555;
+}
+
+/* MEDIA */
+.media {
+  width: 40%;
+}
+
+.media img,
+.media video {
+  width: 100%;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
-/* 비디오 */
-.video-box {
-  position: relative;
-  width: 80%;
-}
-
-video {
-  width: 100%;
-  border-radius: 20px;
-}
-
+/* BUTTON */
 #playBtn {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
+  margin-top: 10px;
   padding: 10px 16px;
   border: none;
   border-radius: 30px;
@@ -126,28 +164,41 @@ video {
   cursor: pointer;
 }
 
-/* 섹션별 하늘색 톤 변화 */
-.poster {
-  background: linear-gradient(120deg, #d9f3ff, #ffffff);
+/* SCROLL ANIMATION */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s ease;
 }
 
-.video {
-  background: linear-gradient(120deg, #bfe9ff, #eaf7ff);
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.goods {
-  background: linear-gradient(120deg, #a6ddff, #dff5ff);
-}
-
+// VIDEO CONTROL
 const video = document.getElementById("video");
 const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
   if (video.paused) {
     video.play();
-    btn.textContent = "Pause";
+    btn.textContent = "⏸ Pause";
   } else {
     video.pause();
-    btn.textContent = "Play";
+    btn.textContent = "▶ Play";
   }
+});
+
+// SCROLL REVEAL ANIMATION
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+});
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
 });
