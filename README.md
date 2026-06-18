@@ -9,35 +9,42 @@
 
 <body>
 
-  <!-- 첫 화면: 포스터 -->
-  <section class="page poster">
-    <div class="content">
-      <h1>📌 Poster Design</h1>
+  <!-- SECTION 1: POSTER -->
+  <section class="section poster">
+    <div class="left">
+      <h1>01<br>Poster Design</h1>
+      <p>하늘빛 무드로 제작한 맛집 포스터</p>
+    </div>
+
+    <div class="right">
       <img src="images/poster.jpg" alt="poster">
-      <p>하늘빛 감성으로 제작한 맛집 포스터</p>
     </div>
   </section>
 
-  <!-- 두 번째: 영상 -->
-  <section class="page video">
-    <div class="content">
-      <h1>🎬 Promo Video</h1>
+  <!-- SECTION 2: VIDEO -->
+  <section class="section video">
+    <div class="left">
+      <h1>02<br>Promo Video</h1>
+      <p>브랜드 감성을 담은 영상 콘텐츠</p>
+    </div>
 
+    <div class="right">
       <div class="video-box">
         <video id="video" src="video/promo.mp4"></video>
-        <button id="playBtn">▶ Play</button>
+        <button id="playBtn">Play</button>
       </div>
-
-      <p>브랜드 무드를 담은 홍보 영상</p>
     </div>
   </section>
 
-  <!-- 세 번째: 굿즈 -->
-  <section class="page goods">
-    <div class="content">
-      <h1>🎁 Goods Design</h1>
-      <img src="images/goods.jpg" alt="goods">
+  <!-- SECTION 3: GOODS -->
+  <section class="section goods">
+    <div class="left">
+      <h1>03<br>Goods Design</h1>
       <p>브랜드 아이덴티티를 담은 굿즈</p>
+    </div>
+
+    <div class="right">
+      <img src="images/goods.jpg" alt="goods">
     </div>
   </section>
 
@@ -51,49 +58,55 @@ body {
   font-family: Arial, sans-serif;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
+  background: #eaf7ff;
 }
 
-/* 각 페이지 */
-.page {
+/* 섹션 = 한 화면 */
+.section {
   height: 100vh;
+  display: flex;
+  scroll-snap-align: start;
+}
+
+/* 좌측 텍스트 */
+.left {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.left h1 {
+  font-size: 48px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.left p {
+  margin-top: 20px;
+  color: #555;
+}
+
+/* 우측 비주얼 */
+.right {
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;
-  text-align: center;
-  padding: 40px;
-}
-
-/* 하늘색 계열 배경 */
-.poster {
-  background: linear-gradient(180deg, #d9f3ff, #ffffff);
-}
-
-.video {
-  background: linear-gradient(180deg, #bfe9ff, #eaf7ff);
-}
-
-.goods {
-  background: linear-gradient(180deg, #a6ddff, #dff5ff);
-}
-
-/* 콘텐츠 박스 */
-.content {
-  max-width: 700px;
 }
 
 /* 이미지 */
-img {
-  width: 100%;
+.right img {
+  width: 80%;
   border-radius: 20px;
-  margin-top: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
-/* 영상 */
+/* 비디오 */
 .video-box {
   position: relative;
-  margin-top: 20px;
+  width: 80%;
 }
 
 video {
@@ -101,11 +114,10 @@ video {
   border-radius: 20px;
 }
 
-/* 버튼 */
 #playBtn {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 15px;
+  left: 15px;
   padding: 10px 16px;
   border: none;
   border-radius: 30px;
@@ -114,15 +126,28 @@ video {
   cursor: pointer;
 }
 
+/* 섹션별 하늘색 톤 변화 */
+.poster {
+  background: linear-gradient(120deg, #d9f3ff, #ffffff);
+}
+
+.video {
+  background: linear-gradient(120deg, #bfe9ff, #eaf7ff);
+}
+
+.goods {
+  background: linear-gradient(120deg, #a6ddff, #dff5ff);
+}
+
 const video = document.getElementById("video");
 const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
   if (video.paused) {
     video.play();
-    btn.textContent = "⏸ Pause";
+    btn.textContent = "Pause";
   } else {
     video.pause();
-    btn.textContent = "▶ Play";
+    btn.textContent = "Play";
   }
 });
